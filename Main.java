@@ -73,6 +73,12 @@ public class Main {
 		//ajouter C1 à C10
 			hbase.addCol(0, 10);
 			hbase.display();
-		    
+			
+		//test sysTransform() beginning
+			byte[][] tab3 = {{1,1,0,0,1,1,1},{0,1,1,1,0,1,0},{1,0,1,0,1,0,1},{1,1,1,1,1,0,0}};
+	    	Matrix M = new Matrix(tab3);
+	    	System.out.println(" la matrice M est: ");
+	    	M.display();
+		    M.sysTransform();
     }
 }

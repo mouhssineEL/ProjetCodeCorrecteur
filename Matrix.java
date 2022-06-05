@@ -149,5 +149,19 @@ public class Matrix {
    		 }
    }
     
-}
+   //exercice 4
+    
+    public void sysTransform(){
+       // Matrix result = new Matrix(rows, cols);
+        int i = 1,j=(cols-rows)+1;
+        while ((i <= rows )&& (j <= cols)) {
+        
+        System.out.println("here is ones "+i+" "+j);			
+        i++;
+        j++;						
 
+       }
+        
+       // return result;
+}
+}
