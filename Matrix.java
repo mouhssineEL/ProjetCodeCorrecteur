@@ -140,6 +140,7 @@ public class Matrix {
     		 data[a][i]= (byte) ((data[a][i]+ data[b][i])%2); 
     		 }
     }
+    
     //ajouter les colonnes 
 
     public void addCol(int a, int b) {
