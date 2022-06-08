@@ -160,16 +160,19 @@ public class Matrix {
     			if(data[z][j]==1) {
     				shiftRow(z, i);
     				break;
-    			}}}}
-        
-       /* while ((i < rows )&& (j < cols)) {
+    			}}}
+        while(i<rows && j<cols) {
         	
-        	}*/
-       // i++;
-        //j++;						
-
-       
+        	if(data[i][j] == 1 )
+        	for (int a = 1; a<rows; a++) {
+        		if(data[a][j] == 1) {
+        			addRow(a, i);}
+        	}
+        	i++;j++;
+        	}
         
-       // return result;
-//}
+    
+    }
+        
+   
 }
