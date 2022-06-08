@@ -154,15 +154,22 @@ public class Matrix {
     
     public void sysTransform(){
        // Matrix result = new Matrix(rows, cols);
-        int i = 1,j=(cols-rows)+1;
-        while ((i <= rows )&& (j <= cols)) {
+        int i = 0,j=(cols-rows);
+        if(data[i][j] == 0) {
+    		for(int z = 1;z < rows;z++) {
+    			if(data[z][j]==1) {
+    				shiftRow(z, i);
+    				break;
+    			}}}}
         
-        System.out.println("here is ones "+i+" "+j);			
-        i++;
-        j++;						
+       /* while ((i < rows )&& (j < cols)) {
+        	
+        	}*/
+       // i++;
+        //j++;						
 
-       }
+       
         
        // return result;
-}
+//}
 }

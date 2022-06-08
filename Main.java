@@ -84,5 +84,14 @@ public class Main {
 	    	System.out.println(" la matrice M est: ");
 	    	M.display();
 		    M.sysTransform();
+			M.display();
+			//test sysTransform() beginning
+			byte[][] tab4 = {{1,0,0,0,0,0,0,1},{1,0,1,1,0,1,1,1},{1,0,0,0,1,1,0,0},{0,1,1,1,1,0,1,1}};
+	    	Matrix T = new Matrix(tab4);
+	    	System.out.println(" la matrice T est: ");
+	    	T.display();
+		    T.sysTransform();
+			T.display();
+			
     }
 }
