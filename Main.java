@@ -70,28 +70,24 @@ public class Main {
 		     Matrix hbase = loadMatrix("data/matrix-15-20-3-4", 15, 20);
 		    System.out.println(" la matrice 'matrix-15-20-3-4 ' est : ");
 		     hbase.display();
-		     
+		     /*
 	   //ajouter L1 à L10
 		    hbase.addRow(0, 10); 
 		    hbase.display();
 		//ajouter C1 à C10
 			hbase.addCol(0, 10);
 			hbase.display();
-			
+			*/
 		//test sysTransform() beginning
 			byte[][] tab3 = {{1,1,0,0,1,1,1},{0,1,1,1,0,1,0},{1,0,1,0,1,0,1},{1,1,1,1,1,0,0}};
 	    	Matrix M = new Matrix(tab3);
 	    	System.out.println(" la matrice M est: ");
 	    	M.display();
-		    M.sysTransform();
-			M.display();
-			//test sysTransform() beginning
-			byte[][] tab4 = {{1,0,0,0,0,0,0,1},{1,0,1,1,0,1,1,1},{1,0,0,0,1,1,0,0},{0,1,1,1,1,0,1,1}};
-	    	Matrix T = new Matrix(tab4);
-	    	System.out.println(" la matrice T est: ");
-	    	T.display();
-		    T.sysTransform();
-			T.display();
-			
+		    M.sysTransform().display();
+		
+		     hbase.display();
+		     Matrix H =  hbase.sysTransform();
+		     H.display();
+		     
     }
 }

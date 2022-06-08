@@ -1,4 +1,7 @@
 import java.util.*;
+
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import java.io.*;
 
 public class Matrix {
@@ -152,26 +155,51 @@ public class Matrix {
     
    //exercice 4
     
-    public void sysTransform(){
-       // Matrix result = new Matrix(rows, cols);
-        int i = 0,j=(cols-rows);
-        if(data[i][j] == 0) {
-    		for(int z = 1;z < rows;z++) {
-    			if(data[z][j]==1) {
-    				shiftRow(z, i);
-    				break;
-    			}}}
-        while(i<rows && j<cols) {
-        	
-        	if(data[i][j] == 1 )
-        	for (int a = 1; a<rows; a++) {
-        		if(data[a][j] == 1) {
-        			addRow(a, i);}
-        	}
+    public Matrix sysTransform(){
+      Matrix result = new Matrix(rows, cols);
+    
+    //copie le contenu de la matrix vers la matrice resulat
+  	for (int i = 0; i < rows; i++) {
+          for (  int j = 0; j <cols; j++) {
+              result.data[i][j] = data[i][j];}}
+  	
+    int i = 0,j=(cols-rows);
+     while(i < rows && j < cols) {
+    	 //chercher la premier ligne qui contient un 1 et changer avec le premier col et row
+    	 for(int z = i; z < rows; z++) {
+    			if(result.data[z][j] == 1) {
+    				result.shiftRow(i, z);
+    				//break;
+    			}}
+        // mettre en zeros 0 tous  les lignes au dessous de notre 1 
+    		for (int a = i+1; a < rows; a++) {
+    			if(result.data[a][j] == 1) { result.addRow(a, i);}
+    		}
         	i++;j++;
         	}
+     //initialisation de les variables i et j
+     i = rows; j = cols-1;
+     while(i >= 0 && j >= cols-rows) {
+    	// mettre en zeros 0 tous  les lignes au dessous de notre 1 
+ 		for (int a = i-1; a >= 0; a--) {
+ 			System.out.println(i + " "+j + " "+ a);
+ 			System.out.println(result.data[3][6]);
+ 			if(result.data[a][j] == 1) { 
+ 				result.addRow(a, i);}
+ 		}
+ 		
+    	 
+    	 i--; j--;
+    	 
+     }
         
-    
+     
+     
+     
+     
+       //return le la matric forma systématique
+        return result;
+        
     }
         
    
