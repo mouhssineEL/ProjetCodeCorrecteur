@@ -178,22 +178,20 @@ public class Matrix {
         	i++;j++;
         	}
      //initialisation de les variables i et j
-     i = rows; j = cols-1;
+     i = rows-1; j = cols-1;
+    
      while(i >= 0 && j >= cols-rows) {
     	// mettre en zeros 0 tous  les lignes au dessous de notre 1 
  		for (int a = i-1; a >= 0; a--) {
- 			System.out.println(i + " "+j + " "+ a);
- 			System.out.println(result.data[3][6]);
  			if(result.data[a][j] == 1) { 
  				result.addRow(a, i);}
  		}
  		
-    	 
     	 i--; j--;
     	 
      }
         
-     
+  
      
      
      
