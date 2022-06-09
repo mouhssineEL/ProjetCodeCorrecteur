@@ -83,10 +83,20 @@ public class Main {
 	    	Matrix M = new Matrix(tab3);
 	    	System.out.println(" la matrice M est: ");
 	    	M.display();
-		    M.sysTransform().display();
+		    M.sysTransform();
+		    M.display();
 		
 		     hbase.display();
 		     Matrix H =  hbase.sysTransform();
 		     H.display();
+		     System.out.println(" la matrice generatice :\n");
+		     Matrix G =  hbase.genG(); 
+		     G.display();
+		     System.out.println("la matrice identite de hbase est:  \n ");
+		     Matrix id = hbase.createIden( hbase.getCols()- hbase.getRows());
+		     id.display();
+		     System.out.println("la matrice M : \n");
+		     Matrix ma =  H.mat();
+		     ma.display();
     }
 }

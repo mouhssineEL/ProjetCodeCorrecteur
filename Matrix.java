@@ -169,7 +169,7 @@ public class Matrix {
     	 for(int z = i; z < rows; z++) {
     			if(result.data[z][j] == 1) {
     				result.shiftRow(i, z);
-    				//break;
+    				break;
     			}}
         // mettre en zeros 0 tous  les lignes au dessous de notre 1 
     		for (int a = i+1; a < rows; a++) {
@@ -181,7 +181,7 @@ public class Matrix {
      i = rows-1; j = cols-1;
     
      while(i >= 0 && j >= cols-rows) {
-    	// mettre en zeros 0 tous  les lignes au dessous de notre 1 
+    	// mettre en zeros 0 tous  les lignes en haut de notre 1 
  		for (int a = i-1; a >= 0; a--) {
  			if(result.data[a][j] == 1) { 
  				result.addRow(a, i);}
@@ -190,15 +190,66 @@ public class Matrix {
     	 i--; j--;
     	 
      }
-        
-  
-     
-     
-     
-       //return le la matric forma systématique
+       //return la matrice forme systématique
         return result;
         
     }
+    
+    
+    
+    //la méthode genG() permet de generér une matrice de H' sous forme G =(id|M^t)
+    /*donc premierement on cherche la matrice M^t ensuite on l'joute avec l'indetité appropriée
+     * 
+     * */
+    /* pour simplifie le travail apres, on va creé une méthode qui génére 
+    une matrice identité premiérement*/
         
+    public Matrix createIden(int rows) {
+    	Matrix id = new Matrix(rows, rows);
+    	for(int i = 0 ; i<rows; i++) {
+    		for(int j = 0; j<rows; j++) {
+    			if(i == j)
+    				id.data[i][j] = 1;
+    			else 
+    				id.data[i][j] =0;
+    		}
+    	}
+    	
+    	return id;
+    }
+    public Matrix mat() {
+    	Matrix H = sysTransform();
+        int C = H.getCols(), R =  C - H.getRows();
+
+    	Matrix M = new Matrix(C, R);
+    	for(int i = 0, j = 0; i<R ; i++, j++) {
+    		M.data[i][j] = H.data[i][j];
+    		
+    	}
+    	return M;
+    	
+    }
+    public Matrix genG() {
+        	//obtenir la matrice sous forme systématique de M
+            Matrix H = sysTransform();
+           // H.display();
+            
+          //déclaration de la matrice qui va contenir la genG de H'
+            int C = H.getCols(), R =  C - H.getRows();
+            Matrix id = H.createIden( H.getCols()- H.getRows());
+		  //  id.display();
+		    Matrix M = H.mat();
+		  //  M.display();
+		    
+            Matrix result = new Matrix(R, C);
+            for(int i = 0, j = 0; i<R; i++,j++) {
+            	result.data[i][j] = id.data[i][j];
+            	
+            }
+            
+            //return la matrice forme systématique
+             return result;
+             
+        }
    
 }
