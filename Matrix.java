@@ -218,18 +218,17 @@ public class Matrix {
     	return id;
     }
     public Matrix mat() {
-    	Matrix H = sysTransform();
-        int C = H.getCols(), R =  C - H.getRows();
-
-    	Matrix M = new Matrix(C, R);
-    	for(int i = 0, j = 0; i<R ; i++, j++) {
-    		M.data[i][j] = H.data[i][j];
-    		
-    	}
-    	return M;
-    	
+    	int cols_r = getCols()- getRows();
+    	int rows_r = getRows();
+        Matrix r = new Matrix(rows_r,cols_r);
+        for (int i = 0 ; i<rows_r; i++) {
+        	for (int j = 0 ; j<cols_r;j++) {
+        		r.data[i][j]=data[i][j];
+        			}
+        	}
+    	return r;
     }
-    public Matrix genG() {
+   /*public Matrix genG() {
         	//obtenir la matrice sous forme systématique de M
             Matrix H = sysTransform();
            // H.display();
@@ -258,7 +257,27 @@ public class Matrix {
             //return la matrice forme systématique
              return result;
              
-        }
+        }*/
+    public Matrix genG() {
+        Matrix r = mat();
+        r = r.transpose();
+        Matrix id = createIden(r.getRows());
+        Matrix res = new Matrix(getRows(),r.getCols()+id.getCols());  
+        for (int i = 0 ; i < id.getRows(); i++) {
+        	for (int j = 0 ; j < id.getCols(); j++) {
+        			res.data[i][j]= id.data[i][j];
+        	}
+        }    
+
+        for (int i = 0 ; i < id.getRows(); i++) {
+        		for (int j = id.getCols(); j < res.getCols(); j++ ) {
+        				res.data[i][j] = r.data[i][j-id.getCols()];
+        				}
+        	}
+        return res;
+       
+       }
+    
    
     
     
