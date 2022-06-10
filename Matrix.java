@@ -238,18 +238,53 @@ public class Matrix {
             int C = H.getCols(), R =  C - H.getRows();
             Matrix id = H.createIden( H.getCols()- H.getRows());
 		  //  id.display();
-		    Matrix M = H.mat();
-		  //  M.display();
-		    
+		    Matrix M = mat();
+		    M.display();
+		     
             Matrix result = new Matrix(R, C);
-            for(int i = 0, j = 0; i<R; i++,j++) {
-            	result.data[i][j] = id.data[i][j];
+           
+            	int i =0, j= 0;
+            	while(i < R && j < C) {
+            		if(j<= R)
+            			result.data[i][j]= 1;
+            		else 
+            			result.data[i][j] = 1;
+            		i++;j++;
+            	}
             	
-            }
+            	
+            
             
             //return la matrice forme systématique
              return result;
              
         }
    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
