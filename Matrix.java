@@ -153,7 +153,7 @@ public class Matrix {
    		 }
    }
     
-   //exercice 4
+   /******************exercice 4********************************/
     
     public Matrix sysTransform(){
       Matrix result = new Matrix(rows, cols);
@@ -171,7 +171,7 @@ public class Matrix {
     				result.shiftRow(i, z);
     				break;
     			}}
-        // mettre en zeros 0 tous  les lignes au dessous de notre 1 
+        // mettre en zeros 0 tous  les lignes au dessous de notre ; forme une matrice triangulaire inferieure
     		for (int a = i+1; a < rows; a++) {
     			if(result.data[a][j] == 1) { result.addRow(a, i);}
     		}
@@ -181,7 +181,7 @@ public class Matrix {
      i = rows-1; j = cols-1;
     
      while(i >= 0 && j >= cols-rows) {
-    	// mettre en zeros 0 tous  les lignes en haut de notre 1 
+    	// mettre en zeros 0 tous  les lignes en haut de notre 1; forme une matrice triangulaire supérieure
  		for (int a = i-1; a >= 0; a--) {
  			if(result.data[a][j] == 1) { 
  				result.addRow(a, i);}
@@ -195,91 +195,39 @@ public class Matrix {
         
     }
     
+    /*****************************************************************************************/
     
-    
+    /************************************exercice 5: *****************************************/
     //la méthode genG() permet de generér une matrice de H' sous forme G =(id|M^t)
     /*donc premierement on cherche la matrice M^t ensuite on l'joute avec l'indetité appropriée
      * 
      * */
-    /* pour simplifie le travail apres, on va creé une méthode qui génére 
-    une matrice identité premiérement*/
-        
-    public Matrix createIden(int rows) {
-    	Matrix id = new Matrix(rows, rows);
-    	for(int i = 0 ; i<rows; i++) {
-    		for(int j = 0; j<rows; j++) {
-    			if(i == j)
-    				id.data[i][j] = 1;
-    			else 
-    				id.data[i][j] =0;
+   
+    /************************************************************************************************/
+   /*
+    * gen differeht*/
+ public Matrix genG() {
+    	
+    	// trouve la ligne pour identifié le nombre des lignes dans la matrice Gen
+    	int R = cols - rows;
+    
+    	Matrix gen = new Matrix(R , cols);
+    	Matrix H = sysTransform();
+    	// initalisation la matrice identifier a gauche
+    	for (int i = 0; i < R; i++) {
+    		gen.data[i][i] = 1;
+    	}
+    	
+    	// transpose la matrice M
+    	for (int i = 0; i < R; i++) {
+    		for (int j = 0; j < rows; j++) {
+    			gen.data[i][j+R] = H.data[j][i];
     		}
     	}
     	
-    	return id;
-    }
-    public Matrix mat() {
-    	int cols_r = getCols()- getRows();
-    	int rows_r = getRows();
-        Matrix r = new Matrix(rows_r,cols_r);
-        for (int i = 0 ; i<rows_r; i++) {
-        	for (int j = 0 ; j<cols_r;j++) {
-        		r.data[i][j]=data[i][j];
-        			}
-        	}
-    	return r;
-    }
-   /*public Matrix genG() {
-        	//obtenir la matrice sous forme systématique de M
-            Matrix H = sysTransform();
-           // H.display();
-            
-          //déclaration de la matrice qui va contenir la genG de H'
-            int C = H.getCols(), R =  C - H.getRows();
-            Matrix id = H.createIden( H.getCols()- H.getRows());
-		  //  id.display();
-		    Matrix M = mat();
-		    M.display();
-		     
-            Matrix result = new Matrix(R, C);
-           
-            	int i =0, j= 0;
-            	while(i < R && j < C) {
-            		if(j<= R)
-            			result.data[i][j]= 1;
-            		else 
-            			result.data[i][j] = 1;
-            		i++;j++;
-            	}
-            	
-            	
-            
-            
-            //return la matrice forme systématique
-             return result;
-             
-        }*/
-    public Matrix genG() {
-        Matrix r = mat();
-        r = r.transpose();
-        Matrix id = createIden(r.getRows());
-        Matrix res = new Matrix(getRows(),r.getCols()+id.getCols());  
-        for (int i = 0 ; i < id.getRows(); i++) {
-        	for (int j = 0 ; j < id.getCols(); j++) {
-        			res.data[i][j]= id.data[i][j];
-        	}
-        }    
-
-        for (int i = 0 ; i < id.getRows(); i++) {
-        		for (int j = id.getCols(); j < res.getCols(); j++ ) {
-        				res.data[i][j] = r.data[i][j-id.getCols()];
-        				}
-        	}
-        return res;
-       
-       }
-    
-   
-    
+    	return gen;
+      
+    }    
     
     
     
